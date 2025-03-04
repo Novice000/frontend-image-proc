@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/shared/header";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 const inter = Inter({
   weight: "400",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   description: "Compress Image and  Remove background from image",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,10 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-gray-50 text-gray-900 antialiased flex flex-col h-screen`}
+        className={`${inter.className} bg-gray-50 text-gray-900 antialiased flex flex-col min-h-screen`}
       >
         <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
