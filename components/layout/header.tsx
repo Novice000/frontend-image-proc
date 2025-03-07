@@ -23,9 +23,9 @@ function Header() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-0 w-full flex justify-between items-center py-8 md:px-20 px-4 bg-white shadow-gray z-50"
+        className="fixed top-0 w-full flex justify-between items-center py-5 md:py-8 md:px-20 px-4 bg-white z-50 shadow-none"
         >
-        <div className="flex justify-between w-full items-center space-x-5">
+        <div className="flex justify-between w-full items-center space-x-5 ">
             <h1 className={`${anton.className} text-3xl`} >MyImageProc</h1>
             <ul className="hidden md:flex space-x-5">
                 <li className="nav-pill"><Link href="">Compress Image</Link></li>
