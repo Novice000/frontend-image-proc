@@ -4,7 +4,6 @@ import { useFormContext } from "react-hook-form";
 import { UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 
 interface Props {
   uploaded: boolean;

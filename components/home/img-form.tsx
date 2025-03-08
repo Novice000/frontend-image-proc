@@ -42,15 +42,15 @@ function ImgForm() {
       })
       .then((res) => {
         if (res.status === 200) {
-          let imageBlob = res.data;
-          let imageUrl = URL.createObjectURL(imageBlob);
+          const imageBlob = res.data;
+          const imageUrl = URL.createObjectURL(imageBlob);
           setImageURL(imageUrl);
         }else{
           setIsError(true);
         }
         setIsLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsError(true);
       });
   }

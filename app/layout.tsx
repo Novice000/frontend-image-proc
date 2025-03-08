@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
   description: "Compress Image and  Remove background from image",
 };
 
-const queryclient = new QueryClient();
 export default function RootLayout({
   children,
 }: Readonly<{
