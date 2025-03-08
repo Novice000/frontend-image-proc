@@ -44,7 +44,7 @@ function ImageOptions() {
               />
             </FormControl>
             <FormDescription>
-              Adjust image quality. Defaults to 50.
+              Adjust image quality. Defaults to 75.
             </FormDescription>
             <FormMessage />
           </FormItem>

@@ -22,7 +22,7 @@ function ImgForm() {
 
   const form = useForm<z.infer<typeof imgFormSchema>>({
     resolver: zodResolver(imgFormSchema),
-    defaultValues: { quality: 50, img_format: "jpeg", remove_bg: false },
+    defaultValues: { quality: 75, img_format: "jpeg", remove_bg: false },
   });
 
   function handleSubmit(data: z.infer<typeof imgFormSchema>) {
@@ -45,6 +45,8 @@ function ImgForm() {
           let imageBlob = res.data;
           let imageUrl = URL.createObjectURL(imageBlob);
           setImageURL(imageUrl);
+        }else{
+          setIsError(true);
         }
         setIsLoading(false);
       })

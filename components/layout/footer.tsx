@@ -10,9 +10,8 @@ function Footer(){
                     <p>© 2025 MyImageProc. All Rights Reserved</p>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center gap-5 md:gap-18 w-full">
-                    <Link href=""> <div className="flex gap-2 items-center"><GithubIcon/> github</div></Link>
-                    <Link href=""><div className="flex gap-2 item-center"><LinkedinIcon/>linkedin</div></Link>
-                    <Link href=""><div className="flex gap-2 items-center"><InstagramIcon/>instagram</div></Link>
+                    <Link href="https://github.com/novice000"> <div className="flex gap-2 items-center"><GithubIcon/> github</div></Link>
+                    <Link href="www.linkedin.com/in/efemena-esegbue-974a9a317"><div className="flex gap-2 item-center"><LinkedinIcon/>linkedin</div></Link>
                 </div>
         </footer>
     )
