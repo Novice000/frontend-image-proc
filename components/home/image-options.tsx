@@ -65,8 +65,8 @@ function ImageOptions() {
                 type="button"
                 onClick={() => field.onChange(!field.value)}
                 className={`w-full ${
-                  field.value ? "bg-blue-500 text-white" : "bg-black text-white"
-                }`}
+                  field.value ? "bg-black text-white" : "bg-white text-black"
+                } border border-black`}
               >
                 Toggle Background Removal
               </Button>

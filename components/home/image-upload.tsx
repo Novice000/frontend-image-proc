@@ -61,7 +61,7 @@ function ImageUpload({ uploaded , unProcessed, setUploaded, setUnProcessed }: Pr
       {/* {uploaded && <Image src={unProcessed} height={150} width={200} alt="unprocessed image" />} */}
       <p>Drag and drop</p>
       <p>or</p>
-      <label className="rounded-full bg-black text-white px-6 py-4 hover:bg-blue-500 hover:text-white cursor-pointer">
+      <label className="rounded-full bg-black text-white px-4 py-2 hover:bg-blue-500 mb-2 hover:text-white cursor-pointer">
         Click to upload
         <Input type="file" onChange={(e) => {
           const file = e.target.files?.[0];

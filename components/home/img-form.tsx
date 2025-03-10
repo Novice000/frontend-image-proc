@@ -10,8 +10,8 @@ import instance from "@/axios/axios";
 import ImageUpload from "./image-upload";
 import ImageOptions from "./image-options";
 import ImgDownload from "./img-download";
-import ErrorPage from "./error-page";
 import { BounceLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 
 function ImgForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,7 @@ function ImgForm() {
   const [isError, setIsError] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const [unProcessed, setUnProcessed] = useState("");
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof imgFormSchema>>({
     resolver: zodResolver(imgFormSchema),
@@ -27,6 +28,13 @@ function ImgForm() {
 
   function handleSubmit(data: z.infer<typeof imgFormSchema>) {
     setIsLoading(true);
+    setIsError(false);
+    setImageURL(""); // Reset previous image URL
+    const failsafe = setTimeout(() => { 
+      setIsLoading(false);
+      setIsError(true);
+    }, 60*1000);
+
     const formData = new FormData();
     formData.append("image", data.image);
     if (data.quality) formData.append("quality", data.quality.toString());
@@ -38,60 +46,59 @@ function ImgForm() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        responseType: "blob", // Ensure correct handling of binary responses
+        responseType: "blob",
       })
       .then((res) => {
-        if (res.status === 200) {
           const imageBlob = res.data;
           const imageUrl = URL.createObjectURL(imageBlob);
           setImageURL(imageUrl);
-        }else{
-          setIsError(true);
-        }
-        setIsLoading(false);
       })
       .catch(() => {
         setIsError(true);
+      }).finally(() => {
+        setIsLoading(false)
+        clearTimeout(failsafe);
       });
   }
 
   if (isLoading) {
     return (
-      <div className="h-full w-screen fixed top-0 bg-white bg-opacity-50 fixed z-[60] flex items-center justify-center">
+      <div className="h-full w-screen fixed top-0 bg-white bg-opacity-50 flex items-center justify-center z-[60]">
         <BounceLoader size={40} />
       </div>
     );
   }
 
   if (isError) {
-    return <ErrorPage />;
+    router.push("/error"); 
+    return null;
   }
 
   return (
     <>
-    {!imageURL &&<Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="w-full px-10 md:px-[15%] my-5 grid place-items-center"
-      >
-        <ImageUpload
-          uploaded={uploaded}
-          setUploaded={setUploaded}
-          unProcessed={unProcessed}
-          setUnProcessed={setUnProcessed}
-        />
-        <ImageOptions />
-        <Button
-          type="submit"
-          className="w-full md:w-1/2 bg-black border-black text-white hover:border-blue-500 hover:scale-105 mb-10"
-        >
-          Process
-        </Button>
-      </form>
-    </Form>}
-    {imageURL && (
-        <ImgDownload imageURL={imageURL} setImageURL={setImageURL} />
+      {!imageURL && (
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="w-full px-10 md:px-[15%] my-5 grid place-items-center"
+          >
+            <ImageUpload
+              uploaded={uploaded}
+              setUploaded={setUploaded}
+              unProcessed={unProcessed}
+              setUnProcessed={setUnProcessed}
+            />
+            <ImageOptions />
+            <Button
+              type="submit"
+              className="w-full md:w-1/2 bg-black border-black text-white hover:border-blue-500 hover:scale-105 mb-10"
+            >
+              Process
+            </Button>
+          </form>
+        </Form>
       )}
+      {imageURL && <ImgDownload imageURL={imageURL} setImageURL={setImageURL} />}
     </>
   );
 }

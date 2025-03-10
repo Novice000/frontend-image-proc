@@ -11,7 +11,7 @@ export default function ImgDownload({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-5 my-10">
+      <div className="flex flex-col items-center justify-center gap-5 my-10 shadow-gray-400 shadow-md">
         <h2 className="text-3xl font-bold">Processed Image</h2>
         <Image src={imageURL} width={400} height={400} alt="processed image" />
         <Button
@@ -20,7 +20,7 @@ export default function ImgDownload({
         <a
           href={imageURL}
           download
-          className=" rounded-md text-white px-4 py-2 bg-black hover:bg-white hover:text-black hover:border-black hover:border"
+          className="w-[40%] rounded-md text-white px-4 py-2 bg-black hover:bg-white hover:text-black hover:border-black hover:border"
           onClick={() => {
             setImageURL("");
           }}
@@ -29,7 +29,7 @@ export default function ImgDownload({
         </a>
         </Button>
         <Button 
-        className="w-full md:w-1/2 bg-black border-black text-white hover:border-blue-500 hover:scale-105"
+        className="w-[40%] md:w-1/2 bg-black border-black text-white hover:border-blue-500 hover:scale-105"
         onClick={() => setImageURL("")}>Close</Button>
       </div>
     </>
